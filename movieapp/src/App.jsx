@@ -6,7 +6,7 @@ const App = () => {
             <div className="pattern" />
             <div className="wrapper">
                 <header>
-                    <h1>Find movies you`apos;`ll enjoy without the hassle</h1>
+                    <h1>Find <span className="text-gradient">movies</span> you&apos;ll enjoy without the hassle</h1>
                 </header>
             </div>
         </main>
