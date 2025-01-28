@@ -1,11 +1,8 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
 
 const App = () => {
     return (
-        <h2>Functional arrow component</h2>
+        <div>App</div>
     )
 }
 export default App
