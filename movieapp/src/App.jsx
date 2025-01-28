@@ -3,7 +3,9 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-const app = () => {
-    return ()
+const App = () => {
+    return (
+        <h2>Functional arrow component</h2>
+    )
 }
 export default App
