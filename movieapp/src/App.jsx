@@ -2,11 +2,14 @@ import React from 'react'
 
 const App = () => {
     return (
-        <div>
-            <h1 className="font-bold text-3xl underline">
-                Hello World
-            </h1>
-        </div>
+        <main>
+            <div className="pattern" />
+            <div className="wrapper">
+                <header>
+                    <h1>Find movies you`apos;`ll enjoy without the hassle</h1>
+                </header>
+            </div>
+        </main>
     )
 }
 export default App
