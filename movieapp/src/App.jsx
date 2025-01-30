@@ -15,6 +15,16 @@ const API_OPTIONS = {
 const App = () => {
     const [searchTerm, setSearchTerm] = useState("")
 
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const fetchMovies = async () => {
+        try {
+            const response = await fetch(API_BASE_URL, {})
+        } catch (error){
+            console.log(error)
+        }
+    }
+
     useEffect(() => {}, [])
 
     return (
@@ -24,9 +34,16 @@ const App = () => {
                 <header>
                     <img src="./hero.png" alt="Hero Banner" />
                     <h1>Find <span className="text-gradient">movies</span> you&apos;ll enjoy without the hassle</h1>
+
+                    <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                 </header>
 
-                <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+                <section className="all-movies">
+                    <h2>All Movies</h2>
+
+                    {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+                </section>
+
                 <h1 className="text-white">{searchTerm}</h1>
             </div>
         </main>
