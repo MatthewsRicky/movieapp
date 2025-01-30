@@ -22,6 +22,10 @@ const App = () => {
     const [loading, setLoading] = useState(false)
 
     const fetchMovies = async () => {
+
+        setLoading(true);
+        setErrorMessage("")
+
         try {
 
             const endpoint = `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
@@ -42,6 +46,9 @@ const App = () => {
 
         } catch (error){
             console.log(error)
+        }
+        finally {
+            setLoading(false);
         }
     }
 
