@@ -1,8 +1,8 @@
 import Search from "./components/Search.jsx";
 import {useEffect, useState} from "react";
-import error from "eslint-plugin-react/lib/util/error.js";
 
-const API_BASE_URL = "https://api.themoviedb.org/3";
+
+const API_BASE_URL = "https://api.themoviedb.org/3/discover";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const API_OPTIONS = {
@@ -74,7 +74,7 @@ const App = () => {
 
                     {loading ? (
                         <p className="text-white">Loading...</p>
-                    ) : error ? (
+                    ) : errorMessage ? (
                         <p className="text-red-500">Error: {error.message}</p>
                     ) : (
                         <ul>
