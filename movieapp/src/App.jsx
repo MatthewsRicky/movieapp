@@ -1,5 +1,6 @@
 import Search from "./components/Search.jsx";
 import {useEffect, useState} from "react";
+import Spinner from "./components/Spinner.jsx";
 
 
 const API_BASE_URL = "https://api.themoviedb.org/3/discover";
@@ -73,7 +74,7 @@ const App = () => {
                     <h2>All Movies</h2>
 
                     {loading ? (
-                        <p className="text-white">Loading...</p>
+                        <Spinner />
                     ) : errorMessage ? (
                         <p className="text-red-500">Error: {error.message}</p>
                     ) : (
