@@ -45,6 +45,7 @@ const App = () => {
 
             if(data.response === 'False'){
                 setErrorMessage(data.Error || "Failed to fetch movies.");
+
             }
 
             setMovieList(data.results || []);
