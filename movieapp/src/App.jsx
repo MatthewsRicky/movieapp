@@ -4,7 +4,7 @@ import Spinner from "./components/Spinner.jsx";
 import MovieCard from "./components/MovieCard.jsx";
 
 
-const API_BASE_URL = "https://api.themoviedb.org/3/discover";
+const API_BASE_URL = "https://api.themoviedb.org/3/";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const API_OPTIONS = {
@@ -32,8 +32,8 @@ const App = () => {
         try {
 
             const endpoint = query ?
-                `${API_BASE_URL}/movie?query=${encodeURIComponent(query)}` :
-                `${API_BASE_URL}/movie?sort_by=popularity.desc`;
+                `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}` :
+                `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
 
             const response = await fetch(endpoint, API_OPTIONS);
 
@@ -80,7 +80,7 @@ const App = () => {
                     {loading ? (
                         <Spinner />
                     ) : errorMessage ? (
-                        <p className="text-red-500">Error: {error.message}</p>
+                        <p className="text-red-500">Error: {errorMessage}</p>
                     ) : (
                         <ul>
                             {movieList.map((movie) => (
