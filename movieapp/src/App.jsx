@@ -2,6 +2,7 @@ import Search from "./components/Search.jsx";
 import {useEffect, useState} from "react";
 import Spinner from "./components/Spinner.jsx";
 import MovieCard from "./components/MovieCard.jsx";
+import {useDebounce} from "@react-hook/debounce";
 
 
 const API_BASE_URL = "https://api.themoviedb.org/3/";
@@ -23,6 +24,12 @@ const App = () => {
     const [movieList, setMovieList] = useState([])
 
     const [loading, setLoading] = useState(false)
+
+    const [debouncedSearchTerm  , setDebouncedSearchTerm  ] = useState('')
+
+    //Debounce the searchTerm to prevent too many Aoi requests
+    //By waiting for the user to stop typing for 500ms
+    useDebounce(() => setDebouncedSearchTerm(searchTerm), 500, [searchTerm])
 
     const fetchMovies = async (query) => {
 
@@ -60,8 +67,8 @@ const App = () => {
     }
 
     useEffect(() => {
-        fetchMovies(searchTerm);
-    }, [searchTerm]);
+        fetchMovies(debouncedSearchTerm);
+    }, [debouncedSearchTerm]);
 
     return (
         <main>
