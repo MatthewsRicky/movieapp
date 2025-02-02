@@ -62,8 +62,6 @@ const App = () => {
             if(query && data.result.length > 0) {
                 await updateSearchCount(query, data.result[0]);
             }
-
-
         } catch (error){
             console.error(`Error fetching movies: ${error}`);
             setErrorMessage('Error fetching movies. Please try again later.');
@@ -72,7 +70,6 @@ const App = () => {
             setLoading(false);
         }
     }
-
 		const loadTrendingMovies = async () =>  {
 		try {
 		const movies = await getTrendingMovies()
@@ -104,6 +101,15 @@ const App = () => {
 	            {trendingMovies.length > 0 &&(
 		            <section className="trending">
 									<h2>Trending Movies</h2>
+
+			            <ul>
+				            {trendingMovies.map((movie, index) => (
+					            <li key={movie.$id}>
+						            <p>{index + 1}</p>
+						            <img src={movie.poster_url} alt={movie.title} />
+					            </li>
+				            ))}
+			            </ul>
 		            </section>
 	            )}
 
@@ -123,8 +129,6 @@ const App = () => {
                         </ul>
                     )}
                 </section>
-
-                <h1 className="text-white">{searchTerm}</h1>
             </div>
         </main>
     )
