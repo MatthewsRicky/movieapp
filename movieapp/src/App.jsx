@@ -2,7 +2,7 @@ import Search from "./components/Search.jsx";
 import {useEffect, useState} from "react";
 import Spinner from "./components/Spinner.jsx";
 import MovieCard from "./components/MovieCard.jsx";
-import {useDebounce} from "@react-hook/debounce";
+import {useDebounce} from "react-use";
 import {updateSearchCount} from "./appwrite.js";
 
 
