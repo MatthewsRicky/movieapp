@@ -11,8 +11,6 @@ const client = new Client()
 
 const database = new Databases(client)
 
-
-
 export const updateSearchCount = async (searchTerm, movie) => {
 //1. Use Appwrite SDK to check if the search term exists in the database
   try {
@@ -33,7 +31,7 @@ export const updateSearchCount = async (searchTerm, movie) => {
         searchTerm,
         count: 1,
         movie_id: movie.id,
-        poster_url: `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        poster_url: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
       })
     }
 
@@ -41,4 +39,17 @@ export const updateSearchCount = async (searchTerm, movie) => {
     console.error(error);
   }
 
+}
+
+export const getTrendingMovies = async () => {
+	try {
+		const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+			Query.limit(limit: 5),
+			Query.orderDesc("count"),
+		])
+
+		return result.documents;
+	} catch (error) {
+		console.error(error);
+	}
 }
