@@ -39,24 +39,28 @@ const App = () => {
 
     try {
       const endpoint = query
-        ? `${API_BASE_URL}/search/movie?query=${query}`
+        ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`  
         : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
 
       const response = await fetch(endpoint, API_OPTIONS);
 
+      console.log(response)
       if (!response.ok) {
         throw new Error("Could not fetch movies");
       }
 
       const data = await response.json();
 
+      console.log(data);
+      
+
       if (data.response === "False") {
         setErrorMessage(data.Error || "Failed to fetch movies.");
       }
 
       setMovieList(data.results || []);
-      if (query && data.result.length > 0) {
-        await updateSearchCount(query, data.result[0]);
+      if (query && Array.isArray(data.results).length > 0) {
+        await updateSearchCount(query, data.results[0]);
       }
     } catch (error) {
       console.error(`Error fetching movies: ${error}`);
@@ -82,7 +86,7 @@ const App = () => {
   }, [debouncedSearchTerm]);
 
   useEffect(() => {
-    loadTrendingMovies();
+    loadTrendingMovies;
   }, []);
 
   return (
@@ -99,21 +103,20 @@ const App = () => {
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </header>
 
-        {/*  {trendingMovies.length > 0 &&(
-	            <section className="trending">
-		            <h2>Trending Movies</h2>
+        {trendingMovies.length > 0 && (
+          <section className="trending">
+            <h2>Trending Movies</h2>
 
-		            <ul>
-			            {trendingMovies.map((movie, index) => (
-				            <li key={movie.$id}>
-					            <p>{index + 1}</p>
-					            <img src={movie.poster_url} alt={movie.title} />
-				            </li>
-			            ))}
-		            </ul>
-	            </section>
-            )}
-	            */}
+            <ul>
+              {trendingMovies.map((movie, index) => (
+                <li key={movie.$id}>
+                  <p>{index + 1}</p>
+                  <img src={movie.poster_url} alt={movie.title} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <section className="all-movies">
           <h2>All Movies</h2>
